@@ -489,29 +489,28 @@ void analyze_student() {
 
     // 单科排名分析
     printf("1. 单科成绩排名分析:\n");
-    for (int subject = 0; subject < stu->subject_count; subject++) {
+    for (int subject = 0; subject < students[index].subject_count; subject++) {
         int rank = 1;
         for (int i = 0; i < student_count; i++) {
             if (students[i].subject_count > subject &&
-                students[i].scores[subject] > stu->scores[subject]) {
+                students[i].scores[subject] > students[index].scores[subject]) {
                 rank++;
             }
         }
         printf("   科目%d: %.1f分，排名 %d/%d\n",
-            subject + 1, stu->scores[subject], rank, student_count);
+            subject + 1, students[index].scores[subject], rank, student_count);
     }
 
     // 优势学科和劣势学科分析
     printf("\n2. 优势与劣势学科分析:\n");
 
-    // 找出最高分和最低分科目
     int best_subject = 0, worst_subject = 0;
-    float best_score = stu->scores[0];
-    float worst_score = stu->scores[0];
-
+    float best_score = students[index].scores[0];
+    float worst_score = students[index].scores[0];
+    //遍历查找学生的所有科目的成绩，并找出最高分和最低分科目
     for (int i = 1; i < stu->subject_count; i++) {
-        if (stu->scores[i] > best_score) {
-            best_score = stu->scores[i];
+        if (students[index].scores[i] > best_score) {
+            best_score = students[index].scores[i];
             best_subject = i;
         }
         if (stu->scores[i] < worst_score) {
@@ -520,8 +519,8 @@ void analyze_student() {
         }
     }
 
-    printf("   优势学科: 科目%d (%.1f分)\n", best_subject + 1, best_score);
-    printf("   劣势学科: 科目%d (%.1f分)\n", worst_subject + 1, worst_score);
+    printf("优势学科: 科目%d (%.1f分)\n", best_subject + 1, best_score);
+    printf("劣势学科: 科目%d (%.1f分)\n", worst_subject + 1, worst_score);
 
     // 与平均分比较
     printf("\n3. 与平均分比较:\n");
@@ -538,6 +537,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

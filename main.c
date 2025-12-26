@@ -98,7 +98,7 @@ int main() {
 
 // 显示菜单
 void display_menu() {
-    system("clear || cls");  // 清屏，兼容Linux和Windows
+    system("clear || cls");  // 清屏,将以前的代码痕迹消除
     printf("\n========== 学生成绩管理系统 ==========\n");
     printf("1. 新增学生信息\n");
     printf("2. 修改学生信息\n");
@@ -539,6 +539,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

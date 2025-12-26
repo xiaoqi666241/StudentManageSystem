@@ -475,7 +475,7 @@ void load_from_file() {
 void analyze_student() {
     char id[20];
     printf("\n请输入要分析的学生学号: ");
-    fgets(id, sizeof(id), stdin);
+    gets(id, sizeof(id), stdin);
     id[strcspn(id, "\n")] = 0;
 
     int index = find_student_index(id);
@@ -540,5 +540,6 @@ void analyze_student() {
         }
     }
 }
+
 
 

@@ -474,8 +474,7 @@ void load_from_file() {
 void analyze_student() {
     char id[20];
     printf("\n请输入要分析的学生学号: ");
-    fgets(id, sizeof(id), stdin);
-    id[strcspn(id, "\n")] = 0;
+    gets(id);
 
     int index = find_student_index(id);
     if (index == -1) {
@@ -483,10 +482,10 @@ void analyze_student() {
         return;
     }
 
-    Student* stu = &students[index];
+    Student *stu = &students[index];
 
-    printf("\n=== 学生成绩分析报告 ===\n");
-    printf("学生: %s - %s\n\n", stu->id, stu->name);
+    printf("\n 学生成绩分析报告 \n");
+    printf("学生: %s - %s\n\n", students[index].id, students[index].name);
 
     // 单科排名分析
     printf("1. 单科成绩排名分析:\n");
@@ -539,6 +538,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

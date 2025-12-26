@@ -26,16 +26,28 @@ int subject_total = 5;  // 默认5门科目
 // 函数声明
 void display_menu();
 void initialize_system();
+
+//新增学生信息 王梦涵 
 void add_student();
-void display_all();
+//修改学生信息王梦涵 
 void modify_student();
+ //删除学生信息王梦涵 
 void delete_student();
+//显示所有学生信息 田维先
+void display_all();
+// 按总分排序（降序）  田维先
 void sort_by_total();
+//按学号排序  田维先
 void sort_by_id();
+//// 按学号查询学生信息  朱振奥
 void search_by_id();
-void analyze_student();
+//保存到文档 朱振奥
 void save_to_file();
+//加载  朱振奥
 void load_from_file();
+//分析成绩  喻梦琪
+void analyze_student();
+//以下几个为全局函数,封怡晨
 int find_student_index(const char* id);
 void calculate_student_stats(Student* stu);
 int confirm_action(const char* message);
@@ -43,12 +55,14 @@ void clear_input_buffer();
 
 // 主函数
 int main() {
+    //
     load_from_file();
 
     int choice;
-    do {
+    while(1) {
         display_menu();
         printf("请输入您的选择 (0-9): ");
+        //只要读入了数就true
         if (scanf("%d", &choice) != 1) {
             clear_input_buffer();
             printf("输入无效，请重新输入！\n");
@@ -78,7 +92,7 @@ int main() {
         }
         printf("\n按Enter键继续...");
         getchar();
-    } while (1);
+    } 
 
     return 0;
 }
@@ -134,7 +148,7 @@ int find_student_index(const char* id) {
     return -1;  // 未找到
 }
 
-// 新增学生
+// 新增学生 王梦涵
 void add_student() {
     if (student_count >= MAX_STUDENTS) {
         printf("学生数量已达上限！\n");
@@ -193,40 +207,7 @@ void add_student() {
         new_student.id, new_student.name, new_student.total, new_student.average);
 }
 
-// 显示所有学生
-void display_all() {
-    if (student_count == 0) {
-        printf("暂无学生信息！\n");
-        return;
-    }
-
-    printf("\n=== 所有学生成绩信息 ===\n");
-    printf("%-15s %-20s ", "学号", "姓名");
-
-    for (int i = 0; i < subject_total; i++) {
-        printf("科目%d ", i + 1);
-    }
-
-    printf("%-10s %-10s\n", "总分", "平均分");
-    printf("----------------------------------------------------------------\n");
-
-    for (int i = 0; i < student_count; i++) {
-        printf("%-15s %-20s ", students[i].id, students[i].name);
-
-        for (int j = 0; j < students[i].subject_count; j++) {
-            printf("%-6.1f ", students[i].scores[j]);
-        }
-
-        // 如果科目数少于总科目数，填充空格
-        for (int j = students[i].subject_count; j < subject_total; j++) {
-            printf("%-6s ", "-");
-        }
-
-        printf("%-10.1f %-10.2f\n", students[i].total, students[i].average);
-    }
-}
-
-// 修改学生信息
+// 修改学生信息  王梦涵
 void modify_student() {
     char id[20];
     printf("\n请输入要修改的学生学号: ");
@@ -281,7 +262,7 @@ void modify_student() {
     printf("\n学生信息修改成功！\n");
 }
 
-// 删除学生信息
+// 删除学生信息  王梦涵
 void delete_student() {
     char id[20];
     printf("\n请输入要删除的学生学号: ");
@@ -316,7 +297,45 @@ void delete_student() {
     printf("学生信息删除成功！\n");
 }
 
-// 按总分排序（降序）
+
+// 显示所有学生信息  田维先
+void display_all() {
+    if (student_count == 0) {
+        printf("暂无学生信息！\n");
+        return;
+    }
+
+    printf("\n=== 所有学生成绩信息 ===\n");
+    printf("%-15s %-20s ", "学号", "姓名");
+
+    for (int i = 0; i < subject_total; i++) {
+        printf("科目%d ", i + 1);
+    }
+
+    printf("%-10s %-10s\n", "总分", "平均分");
+    printf("----------------------------------------------------------------\n");
+
+    for (int i = 0; i < student_count; i++) {
+        printf("%-15s %-20s ", students[i].id, students[i].name);
+
+        for (int j = 0; j < students[i].subject_count; j++) {
+            printf("%-6.1f ", students[i].scores[j]);
+        }
+
+        // 如果科目数少于总科目数，填充空格
+        for (int j = students[i].subject_count; j < subject_total; j++) {
+            printf("%-6s ", "-");
+        }
+
+        printf("%-10.1f %-10.2f\n", students[i].total, students[i].average);
+    }
+}
+
+
+
+
+
+// 按总分排序（降序）  田维先
 void sort_by_total() {
     if (student_count == 0) {
         printf("暂无学生信息！\n");
@@ -338,7 +357,7 @@ void sort_by_total() {
     display_all();
 }
 
-// 按学号排序（升序）
+// 按学号排序（升序）田维先
 void sort_by_id() {
     if (student_count == 0) {
         printf("暂无学生信息！\n");
@@ -360,7 +379,7 @@ void sort_by_id() {
     display_all();
 }
 
-// 按学号查询
+// 按学号查询   朱振奥
 void search_by_id() {
     char id[20];
     printf("\n请输入要查询的学生学号: ");
@@ -398,7 +417,52 @@ void search_by_id() {
     printf("大致排名: %d/%d\n", rank, student_count);
 }
 
-// 分析学生成绩
+
+// 保存数据到文件  朱振奥
+void save_to_file() {
+    FILE* file = fopen(FILENAME, "wb");
+    if (file == NULL) {
+        printf("无法打开文件进行保存！\n");
+        return;
+    }
+
+    // 保存学生数量和科目总数
+    fwrite(&student_count, sizeof(int), 1, file);
+    fwrite(&subject_total, sizeof(int), 1, file);
+
+    // 保存每个学生数据
+    for (int i = 0; i < student_count; i++) {
+        fwrite(&students[i], sizeof(Student), 1, file);
+    }
+
+    fclose(file);
+    printf("数据已保存到文件: %s\n", FILENAME);
+}
+
+// 从文件加载数据  朱振奥
+void load_from_file() {
+    FILE* file = fopen(FILENAME, "rb");
+    if (file == NULL) {
+        printf("未找到数据文件，将创建新文件。\n");
+        return;
+    }
+
+    // 读取学生数量和科目总数
+    fread(&student_count, sizeof(int), 1, file);
+    fread(&subject_total, sizeof(int), 1, file);
+
+    // 读取每个学生数据
+    for (int i = 0; i < student_count; i++) {
+        fread(&students[i], sizeof(Student), 1, file);
+    }
+
+    fclose(file);
+    printf("从文件加载了 %d 个学生数据\n", student_count);
+
+}
+
+
+// 分析学生成绩  喻梦琪
 void analyze_student() {
     char id[20];
     printf("\n请输入要分析的学生学号: ");
@@ -468,45 +532,3 @@ void analyze_student() {
     }
 }
 
-// 保存数据到文件
-void save_to_file() {
-    FILE* file = fopen(FILENAME, "wb");
-    if (file == NULL) {
-        printf("无法打开文件进行保存！\n");
-        return;
-    }
-
-    // 保存学生数量和科目总数
-    fwrite(&student_count, sizeof(int), 1, file);
-    fwrite(&subject_total, sizeof(int), 1, file);
-
-    // 保存每个学生数据
-    for (int i = 0; i < student_count; i++) {
-        fwrite(&students[i], sizeof(Student), 1, file);
-    }
-
-    fclose(file);
-    printf("数据已保存到文件: %s\n", FILENAME);
-}
-
-// 从文件加载数据
-void load_from_file() {
-    FILE* file = fopen(FILENAME, "rb");
-    if (file == NULL) {
-        printf("未找到数据文件，将创建新文件。\n");
-        return;
-    }
-
-    // 读取学生数量和科目总数
-    fread(&student_count, sizeof(int), 1, file);
-    fread(&subject_total, sizeof(int), 1, file);
-
-    // 读取每个学生数据
-    for (int i = 0; i < student_count; i++) {
-        fread(&students[i], sizeof(Student), 1, file);
-    }
-
-    fclose(file);
-    printf("从文件加载了 %d 个学生数据\n", student_count);
-
-}

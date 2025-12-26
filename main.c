@@ -25,7 +25,6 @@ int subject_total = 5;  // 默认5门科目
 
 // 函数声明
 void display_menu();
-void initialize_system();
 
 //新增学生信息 王梦涵 
 void add_student();
@@ -540,6 +539,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

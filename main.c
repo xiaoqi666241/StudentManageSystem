@@ -6,7 +6,7 @@
 #define MAX_STUDENTS 1000
 #define MAX_SUBJECTS 10
 //新建文档
-#define FILENAME "students.dat"
+#define FILENAME "students.text"
 
 // 学生结构体
 typedef struct {
@@ -420,45 +420,54 @@ void search_by_id() {
 
 // 保存数据到文件  朱振奥
 void save_to_file() {
-    FILE* file = fopen(FILENAME, "wb");
+    FILE* file = fopen(FILENAME, "w");  // "w" 文本模式
     if (file == NULL) {
         printf("无法打开文件进行保存！\n");
         return;
     }
 
-    // 保存学生数量和科目总数
-    fwrite(&student_count, sizeof(int), 1, file);
-    fwrite(&subject_total, sizeof(int), 1, file);
-
-    // 保存每个学生数据
+    // 文本格式保存
+    fprintf(file, "%d %d\n", student_count, subject_total);
+    
     for (int i = 0; i < student_count; i++) {
-        fwrite(&students[i], sizeof(Student), 1, file);
+        fprintf(file, "%s %s %d ", students[i].id, students[i].name, 
+                students[i].subject_count);
+        
+        for (int j = 0; j < students[i].subject_count; j++) {
+            fprintf(file, "%.2f ", students[i].scores[j]);
+        }
+        fprintf(file, "%.2f %.2f\n", students[i].total, students[i].average);
     }
-
+    
     fclose(file);
-    printf("数据已保存到文件: %s\n", FILENAME);
+    printf("数据已保存到文本文件: %s\n", FILENAME);
 }
 
 // 从文件加载数据  朱振奥
 void load_from_file() {
-    FILE* file = fopen(FILENAME, "rb");
+    FILE* file = fopen(FILENAME, "r");  // "r" 文本模式
     if (file == NULL) {
         printf("未找到数据文件，将创建新文件。\n");
         return;
     }
 
-    // 读取学生数量和科目总数
-    fread(&student_count, sizeof(int), 1, file);
-    fread(&subject_total, sizeof(int), 1, file);
-
-    // 读取每个学生数据
+    // 文本格式读取
+    fscanf(file, "%d %d", &student_count, &subject_total);
+    
     for (int i = 0; i < student_count; i++) {
-        fread(&students[i], sizeof(Student), 1, file);
+        fscanf(file, "%s %s %d", 
+               students[i].id, 
+               students[i].name, 
+               &students[i].subject_count);
+        
+        for (int j = 0; j < students[i].subject_count; j++) {
+            fscanf(file, "%f", &students[i].scores[j]);
+        }
+        fscanf(file, "%f %f", &students[i].total, &students[i].average);
     }
-
+    
     fclose(file);
-    printf("从文件加载了 %d 个学生数据\n", student_count);
-
+    printf("从文本文件加载了 %d 个学生数据\n", student_count);
 }
 
 
@@ -531,4 +540,5 @@ void analyze_student() {
         }
     }
 }
+
 

@@ -142,6 +142,7 @@ void calculate_student_stats(Student* stu) {
 // 查找学生索引
 int find_student_index(const char* id) {
     for (int i = 0; i < student_count; i++) {
+        //strcmp不仅仅可以比较字典序,还可以比较数字字符串
         if (strcmp(students[i].id, id) == 0) {
             return i;
         }
@@ -163,6 +164,7 @@ void add_student() {
     // 输入学号
     while (1) {
         printf("请输入学号: ");
+        //stdin是常见用法,从键盘输入
         fgets(new_student.id, sizeof(new_student.id), stdin);
         //将\n换成'\0'
         new_student.id[strcspn(new_student.id, "\n")] = '\0';  // 去除换行符
@@ -541,6 +543,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

@@ -451,9 +451,9 @@ void save_to_file() {
 
 // 从文件加载数据  朱振奥
 void load_from_file() {
-    FILE* file = fopen(FILENAME, "r");  // "r" 文本模式
+    FILE* file = fopen(FILENAME, "r");  // "r" 只读文本模式
     if (file == NULL) {
-        printf("未找到数据文件，将创建新文件。\n");
+        printf("未找到数据文件，将使用空文件。\n");
         return;
     }
 
@@ -544,6 +544,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

@@ -49,7 +49,7 @@ void analyze_student();
 //以下几个为全局函数,封怡晨
 int find_student_index(const char* id);
 void calculate_student_stats(Student* stu);
-int confirm_action(const char* message);
+int confirm_action();
 void clear_input_buffer();
 
 // 主函数
@@ -80,7 +80,8 @@ int main() {
         case 8: analyze_student(); break;
         case 9: printf("正在保存数据...\n"); save_to_file(); break;
         case 0:
-            if (confirm_action("确定要退出吗？(y/n): ")) {
+            printf("确定要退出吗？(y/n): ");
+            if (confirm_action()) {
                 printf("正在保存数据并退出...\n");
                 save_to_file();
                 printf("感谢使用学生成绩管理系统！\n");
@@ -122,9 +123,8 @@ void clear_input_buffer() {
 }
 
 // 确认操作
-int confirm_action(const char* message) {
+int confirm_action() {
     char choice;
-    printf("%s", message);
     scanf(" %c", &choice);
     clear_input_buffer();
     return (tolower(choice) == 'y');
@@ -539,6 +539,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

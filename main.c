@@ -166,7 +166,8 @@ void add_student() {
         printf("请输入学号: ");
         //stdin是常见用法,从键盘输入
         fgets(new_student.id, sizeof(new_student.id), stdin);
-        //将\n换成'\0'
+        //strcspn(tr1,str2)从str1开头开始查找,有多少个字符不属于str2,返回此数
+        //主要功能是将\n换成'\0'
         new_student.id[strcspn(new_student.id, "\n")] = '\0';  // 去除换行符
 
         if (find_student_index(new_student.id) != -1) {
@@ -543,6 +544,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

@@ -116,7 +116,9 @@ void display_menu() {
 // 清除输入缓冲区
 void clear_input_buffer() {
     int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF){
+        //空则表示继续,只有不满足条件才结束循环
+    }
 }
 
 // 确认操作
@@ -537,6 +539,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

@@ -478,40 +478,59 @@ void load_from_file() {
 
 
 // 分析学生成绩  喻梦琪
-void analyze_student() {
+void analyze_student(){
     char id[20];
     printf("\n请输入要分析的学生学号: ");
     gets(id);
 
-    int index = find_student_index(id);
-    if (index == -1) {
+    int index =find_student_index(id);
+    if (index ==-1) {
         printf("未找到学号为 %s 的学生！\n", id);
         return;
     }
 
-    Student *stu = &students[index];
+   
 
     printf("\n 学生成绩分析报告 \n");
-    printf("学生: %s - %s\n\n", students[index].id, students[index].name);
+    printf("学生: %s - %s\n\n",students[index].id,students[index].name);
+    
+    //计算各科目班级平均分
+    float class_average_scores[students[index].subject_count];
+    int subject_student_count[students[index].subject_count];
+    
+    for (int subject = 0; subject < students[index].subject_count; subject++) {
+        class_average_scores[subject] = 0;
+        subject_student_count[subject] = 0;
+        
+        for (int i = 0; i < student_count; i++) {
+            if (students[i].subject_count > subject) {
+                class_average_scores[subject] += students[i].scores[subject];
+                subject_student_count[subject]++;
+            }
+        }
+        
+            class_average_scores[subject] /= subject_student_count[subject];
+       
+    }
+
 
     // 单科排名分析
     printf("1. 单科成绩排名分析:\n");
-    for (int subject = 0; subject < students[index].subject_count; subject++) {
-    int rank = 1;
-    int real_count = 0;
+    for (int subject=0; subject<students[index].subject_count; subject++) {
+    int rank =1;
+    int real_count=0;
     
-    for (int i = 0; i < student_count; i++) {
-        if (students[i].subject_count > subject) {
+    for(int i=0;i<student_count;i++) {
+        if(students[i].subject_count>subject) {
             real_count++;
-            if (students[i].scores[subject] > students[index].scores[subject]) {
+            if (students[i].scores[subject]>students[index].scores[subject]) {
                 rank++;
             }
         }
     }
-    printf("   科目%d: %.1f分，排名 %d/%d\n",subject + 1, stu->scores[subject], rank, real_count);
+    printf("科目%d: %.1f分，排名 %d/%d\n",subject + 1, students[index].scores[subject],rank,real_count);
 }
  
-
     // 优势学科和劣势学科分析
     printf("\n2. 优势与劣势学科分析:\n");
     
@@ -520,35 +539,40 @@ void analyze_student() {
     float worst_score = students[index].scores[0];
     
     //遍历查找学生的所有科目的成绩，并找出最高分和最低分科目
-    for (int i = 1; i < students[index].subject_count; i++) {
-        if (students[index].scores[i] > best_score) {
-            best_score = students[index].scores[i];
-            best_subject = i;
+    for(int i=1;i<students[index].subject_count;i++) {
+        if(students[index].scores[i]>best_score) {
+            best_score=students[index].scores[i];
+            best_subject=i;
         }
-        if (students[index].scores[i] < worst_score) {
-            worst_score = students[index].scores[i];
-            worst_subject = i;
+        if(students[index].scores[i]<worst_score) {
+            worst_score=students[index].scores[i];
+            worst_subject=i;
         }
     }
 
     printf("优势学科: 科目%d (%.1f分)\n", best_subject + 1, best_score);
     printf("劣势学科: 科目%d (%.1f分)\n", worst_subject + 1, worst_score);
 
-    // 与平均分比较
-    printf("\n3. 与平均分比较:\n");
-    for (int i = 0; i < students[index].subject_count; i++) {
-        float diff = students[index].scores[i] - students[index].average;
-        if (diff > 0) {
-            printf("   科目%d: 高于平均分 %.1f分\n", i + 1, diff);
-        }
-        else if (diff < 0) {
-            printf("   科目%d: 低于平均分 %.1f分\n", i + 1, -diff);
-        }
-        else {
-            printf("   科目%d: 等于平均分\n", i + 1);
+    // 与班级平均分比较
+    printf("\n3. 与班级平均分比较:\n");
+    for(int i = 0; i < students[index].subject_count; i++) {
+        if(subject_student_count[i]>0) {  
+            float diff = students[index].scores[i]-class_average_scores[i]; 
+            printf("科目%d:\n", i + 1);
+            printf("学生成绩:%.1f分\n",students[index].scores[i]);
+            printf("班级平均:%.1f分\n",class_average_scores[i]);
+            if (diff>0) {
+                printf("高于班级平均分%.1f分\n", diff);
+            }else if(diff<0) {
+                printf("低于班级平均分%.1f分\n", -diff);
+            }
+            else{
+                printf("等于班级平均分\n");
+            }
+        }else{
+            printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
-}
 
 
 

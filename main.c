@@ -488,9 +488,6 @@ void analyze_student(){
         printf("未找到学号为 %s 的学生！\n", id);
         return;
     }
-
-   
-
     printf("\n 学生成绩分析报告 \n");
     printf("学生: %s - %s\n\n",students[index].id,students[index].name);
     
@@ -533,7 +530,6 @@ void analyze_student(){
  
     // 优势学科和劣势学科分析
     printf("\n2. 优势与劣势学科分析:\n");
-    
     int best_subject = 0, worst_subject = 0;
     float best_score = students[index].scores[0];
     float worst_score = students[index].scores[0];
@@ -573,21 +569,5 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

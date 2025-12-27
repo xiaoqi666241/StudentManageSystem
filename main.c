@@ -499,8 +499,7 @@ void analyze_student() {
     for (int subject = 0; subject < students[index].subject_count; subject++) {
         int rank = 1;
         for (int i = 0; i < student_count; i++) {
-            if (students[i].subject_count > subject &&
-                students[i].scores[subject] > students[index].scores[subject]) {
+            if (students[i].subject_count > subject &&students[i].scores[subject] > students[index].scores[subject]) {
                 rank++;
             }
         }
@@ -510,18 +509,19 @@ void analyze_student() {
 
     // 优势学科和劣势学科分析
     printf("\n2. 优势与劣势学科分析:\n");
-
+    
     int best_subject = 0, worst_subject = 0;
     float best_score = students[index].scores[0];
     float worst_score = students[index].scores[0];
+    
     //遍历查找学生的所有科目的成绩，并找出最高分和最低分科目
-    for (int i = 1; i < stu->subject_count; i++) {
+    for (int i = 1; i < students[index].subject_count; i++) {
         if (students[index].scores[i] > best_score) {
             best_score = students[index].scores[i];
             best_subject = i;
         }
-        if (stu->scores[i] < worst_score) {
-            worst_score = stu->scores[i];
+        if (students[index].scores[i] < worst_score) {
+            worst_score = students[index].scores[i];
             worst_subject = i;
         }
     }
@@ -531,8 +531,8 @@ void analyze_student() {
 
     // 与平均分比较
     printf("\n3. 与平均分比较:\n");
-    for (int i = 0; i < stu->subject_count; i++) {
-        float diff = stu->scores[i] - stu->average;
+    for (int i = 0; i < students[index].subject_count; i++) {
+        float diff = students[index].scores[i] - students[index].average;
         if (diff > 0) {
             printf("   科目%d: 高于平均分 %.1f分\n", i + 1, diff);
         }
@@ -544,6 +544,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

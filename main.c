@@ -497,15 +497,20 @@ void analyze_student() {
     // 单科排名分析
     printf("1. 单科成绩排名分析:\n");
     for (int subject = 0; subject < students[index].subject_count; subject++) {
-        int rank = 1;
-        for (int i = 0; i < student_count; i++) {
-            if (students[i].subject_count > subject &&students[i].scores[subject] > students[index].scores[subject]) {
+    int rank = 1;
+    int real_count = 0;
+    
+    for (int i = 0; i < student_count; i++) {
+        if (students[i].subject_count > subject) {
+            real_count++;
+            if (students[i].scores[subject] > students[index].scores[subject]) {
                 rank++;
             }
         }
-        printf("   科目%d: %.1f分，排名 %d/%d\n",
-            subject + 1, students[index].scores[subject], rank, student_count);
     }
+    printf("   科目%d: %.1f分，排名 %d/%d\n",subject + 1, stu->scores[subject], rank, real_count);
+}
+ 
 
     // 优势学科和劣势学科分析
     printf("\n2. 优势与劣势学科分析:\n");
@@ -544,6 +549,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

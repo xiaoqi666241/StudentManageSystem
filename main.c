@@ -164,7 +164,8 @@ void add_student() {
     while (1) {
         printf("请输入学号: ");
         fgets(new_student.id, sizeof(new_student.id), stdin);
-        new_student.id[strcspn(new_student.id, "\n")] = 0;  // 去除换行符
+        //将\n换成'\0'
+        new_student.id[strcspn(new_student.id, "\n")] = '\0';  // 去除换行符
 
         if (find_student_index(new_student.id) != -1) {
             printf("该学号已存在！请重新输入。\n");
@@ -540,6 +541,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

@@ -227,8 +227,8 @@ void modify_student() {
         printf("科目%d: %.1f ", i + 1, students[index].scores[i]);
     }
     printf("\n");
-
-    if (!confirm_action("确定要修改该学生信息吗？(y/n): ")) {
+    printf("确定要修改该学生信息吗？(y/n): ");
+    if (!confirm_action()) {
         printf("操作已取消。\n");
         return;
     }
@@ -277,14 +277,15 @@ void delete_student() {
     }
 
     printf("\n找到学生: %s - %s\n", students[index].id, students[index].name);
-
-    if (!confirm_action("确定要删除该学生吗？此操作不可恢复！(y/n): ")) {
+        printf("确定要删除该学生吗？此操作不可恢复！(y/n): ");
+    if (!confirm_action()) {
         printf("操作已取消。\n");
         return;
     }
 
     // 二次确认
-    if (!confirm_action("请再次确认删除操作 (y/n): ")) {
+    printf("请再次确认删除操作 (y/n): ");
+    if (!confirm_action()) {
         printf("操作已取消。\n");
         return;
     }
@@ -539,6 +540,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

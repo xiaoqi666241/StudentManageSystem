@@ -130,7 +130,7 @@ int confirm_action() {
     return (tolower(choice) == 'y');
 }
 
-// 计算学生统计信息
+// 计算学生统计总分和平均分
 void calculate_student_stats(Student* stu) {
     stu->total = 0;
     for (int i = 0; i < stu->subject_count; i++) {
@@ -539,6 +539,7 @@ void analyze_student() {
         }
     }
 }
+
 
 
 

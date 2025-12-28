@@ -165,6 +165,7 @@ void add_student() {
     while (1) {
         printf("请输入学号: ");
         //stdin是常见用法,从键盘输入
+        //可以读取空格,也不用担心两个scanf和scanf之间因为缓冲器的\n而读取错误
         fgets(new_student.id, sizeof(new_student.id), stdin);
         //strcspn(tr1,str2)从str1开头开始查找,有多少个字符不属于str2,返回此数
         //主要功能是将\n换成'\0'
@@ -569,6 +570,7 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 
 

@@ -317,10 +317,10 @@ void display_all() {
     printf("%-15s %-20s ", "学号", "姓名");
 
     for (int i = 0; i < subject_total; i++) {
-        printf("科目%d ", i + 1);
+        printf("科目%d  ", i + 1);
     }
 
-    printf("%-10s %-10s\n", "总分", "平均分");
+    printf("%-8s %-10s\n", "  总分", "平均分");
     printf("----------------------------------------------------------------\n");
 
     for (int i = 0; i < student_count; i++) {
@@ -571,6 +571,7 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 
 

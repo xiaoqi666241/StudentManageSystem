@@ -206,7 +206,8 @@ void add_student() {
     calculate_student_stats(&new_student);
 
     // 添加到数组
-    students[student_count++] = new_student;
+    students[student_count] = new_student;
+    student_count++;
 
     printf("\n学生信息添加成功！\n");
     printf("学号: %s, 姓名: %s, 总分: %.2f, 平均分: %.2f\n",
@@ -570,6 +571,7 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 
 

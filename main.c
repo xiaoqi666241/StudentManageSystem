@@ -182,7 +182,7 @@ void add_student() {
     // 输入姓名
     printf("请输入姓名: ");
     fgets(new_student.name, sizeof(new_student.name), stdin);
-    new_student.name[strcspn(new_student.name, "\n")] = 0;
+    new_student.name[strcspn(new_student.name, "\n")] = '\0';
 
     // 输入科目数
     printf("请输入考试科目数量 (最多%d门): ", MAX_SUBJECTS);
@@ -218,7 +218,7 @@ void modify_student() {
     char id[20];
     printf("\n请输入要修改的学生学号: ");
     fgets(id, sizeof(id), stdin);
-    id[strcspn(id, "\n")] = 0;
+    id[strcspn(id, "\n")] = '\0';
 
     int index = find_student_index(id);
     if (index == -1) {
@@ -244,7 +244,7 @@ void modify_student() {
     printf("请输入新姓名 (原: %s): ", students[index].name);
     char new_name[50];
     fgets(new_name, sizeof(new_name), stdin);
-    new_name[strcspn(new_name, "\n")] = 0;
+    new_name[strcspn(new_name, "\n")] = '\0';
     if (strlen(new_name) > 0) {
         strcpy(students[index].name, new_name);
     }
@@ -273,7 +273,7 @@ void delete_student() {
     char id[20];
     printf("\n请输入要删除的学生学号: ");
     fgets(id, sizeof(id), stdin);
-    id[strcspn(id, "\n")] = 0;
+    id[strcspn(id, "\n")] = '\0';
 
     int index = find_student_index(id);
     if (index == -1) {
@@ -391,7 +391,7 @@ void search_by_id() {
     char id[20];
     printf("\n请输入要查询的学生学号: ");
     fgets(id, sizeof(id), stdin);
-    id[strcspn(id, "\n")] = 0;
+    id[strcspn(id, "\n")] = '\0';
 
     int index = find_student_index(id);
     if (index == -1) {
@@ -570,6 +570,7 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 
 

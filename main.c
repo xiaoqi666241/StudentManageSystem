@@ -118,7 +118,7 @@ void display_menu() {
 void clear_input_buffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF){
-        //空则表示继续,只有不满足条件才结束循环
+        //消耗掉不符合条件的
     }
 }
 
@@ -569,5 +569,6 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 

@@ -493,7 +493,7 @@ void analyze_student(){
     }
     printf("\n 学生成绩分析报告 \n");
     printf("学生: %s - %s\n\n",students[index].id,students[index].name);
-}
+
     //计算各科目班级平均分
     float class_average_scores[students[index].subject_count];
     int subject_student_count[students[index].subject_count];
@@ -573,6 +573,7 @@ void analyze_student(){
         }
     }
 
+}
 
 
 

@@ -399,7 +399,7 @@ void search_by_id() {
         return;
     }
 
-    Student* stu = &students[index];
+   
 
     printf("\n=== 学生基本信息 ===\n");
     printf("学号: %s\n", stu->id);
@@ -482,7 +482,8 @@ void load_from_file() {
 void analyze_student(){
     char id[20];
     printf("\n请输入要分析的学生学号: ");
-    gets(id);
+
+    gets(id, sizeof(id), stdin);
 
     int index =find_student_index(id);
     if (index ==-1) {
@@ -491,7 +492,7 @@ void analyze_student(){
     }
     printf("\n 学生成绩分析报告 \n");
     printf("学生: %s - %s\n\n",students[index].id,students[index].name);
-    
+}
     //计算各科目班级平均分
     float class_average_scores[students[index].subject_count];
     int subject_student_count[students[index].subject_count];
@@ -570,6 +571,7 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 
 

@@ -167,7 +167,7 @@ void add_student() {
         //stdin是常见用法,从键盘输入
         //可以读取空格,也不用担心两个scanf和scanf之间因为缓冲器的\n而读取错误
         fgets(new_student.id, sizeof(new_student.id), stdin);
-        //strcspn(tr1,str2)从str1开头开始查找,有多少个字符不属于str2,返回此数
+        //strcspn(str1,str2r从str1开头开始查找,有多少个字符不属于str2,返回此数
         //主要功能是将\n换成'\0'
         new_student.id[strcspn(new_student.id, "\n")] = '\0';  // 去除换行符
 
@@ -574,6 +574,7 @@ void analyze_student(){
     }
 
 }
+
 
 
 

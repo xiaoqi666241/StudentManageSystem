@@ -485,7 +485,7 @@ void analyze_student(){
     printf("\n请输入要分析的学生学号: ");
 
     fgets(id, sizeof(id), stdin);
-
+    id[strcspn(id, "\n")] = '\0';
     int index =find_student_index(id);
     if (index ==-1) {
         printf("未找到学号为 %s 的学生！\n", id);
@@ -574,6 +574,7 @@ void analyze_student(){
     }
 
 }
+
 
 
 

@@ -14,7 +14,6 @@ typedef struct {
     char name[50];
     float scores[MAX_SUBJECTS];
     float total;
-    float average;
     int subject_count;
 } Student;
 
@@ -571,6 +570,7 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 
 

@@ -483,7 +483,7 @@ void analyze_student(){
     char id[20];
     printf("\n请输入要分析的学生学号: ");
 
-    gets(id, sizeof(id), stdin);
+    fgets(id, sizeof(id), stdin);
 
     int index =find_student_index(id);
     if (index ==-1) {
@@ -571,6 +571,7 @@ void analyze_student(){
             printf("科目%d:无班级平均分数据\n", i + 1);
         }
     }
+
 
 
 

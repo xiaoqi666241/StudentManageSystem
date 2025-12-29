@@ -400,7 +400,7 @@ void search_by_id() {
         return;
     }
 
-   
+    Student *stu = &students[index];
 
     printf("\n=== 学生基本信息 ===\n");
     printf("学号: %s\n", stu->id);
@@ -574,6 +574,7 @@ void analyze_student(){
     }
 
 }
+
 
 
 
